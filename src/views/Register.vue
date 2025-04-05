@@ -6,7 +6,7 @@
                <input type="email" id="email" name="email" v-model="email">
                <label for="password">Password:</label>
                <input type="password" id="password" name="password" v-model.trim="password">
-               <button :disabled="userStore.loading" type="submit">Crear Usuario</button>
+               <button :disabled="userStore.loading" type="submit" :loading="useUserStore.loading">Crear Usuario</button>
           </form>
      </div>
 </template>

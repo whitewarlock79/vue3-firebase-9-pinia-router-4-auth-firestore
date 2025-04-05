@@ -51,7 +51,7 @@ export const useUserStore = defineStore("userStore", {
         // Redirige al usuario a la página de inicio
         router.push("/home");
       } catch (error) {
-        console.error("Error al registrar usuario:", error);
+        console.log(error.code);
       } finally {
         this.loading = false; // Finaliza la carga
       }
@@ -67,11 +67,10 @@ export const useUserStore = defineStore("userStore", {
       try {
         // Inicia sesión con Firebase Authentication
         const { user } = await signInWithEmailAndPassword(auth, email, password);
-
         // Guarda los datos del usuario autenticado
         this.userData = { email: user.email };
         console.log("Usuario autenticado:", this.userData);
-
+        this.loading = false;
         // Redirige a la página de inicio
         router.push("/home");
       } catch (error) {

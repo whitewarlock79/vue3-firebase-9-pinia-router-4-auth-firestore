@@ -1,12 +1,12 @@
 <template>
      <div>
-          <h1>Login</h1>
+          <h1 class="text-center">Login</h1>
           <form @submit.prevent="handleSubmit">
                <label for="email">email:</label>
                <input type="email" id="email" name="email" v-model="email">
                <label for="password">Password:</label>
                <input type="password" id="password" name="password" v-model.trim="password">
-               <button :disabled="userStore.loadingUser" type="submit">Acceso</button>
+               <a-button :disabled="useUserStore.loading" type="primary" html-type="summit" :loading="useUserStore.loading">Ingresar</a-button>
           </form>
      </div>
 </template>

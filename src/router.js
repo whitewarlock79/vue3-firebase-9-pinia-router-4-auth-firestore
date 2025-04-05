@@ -32,11 +32,11 @@ const requireAuth = async (to, from, next) => {
   }
 };
 const routes = [
-  { path: "/", redirect: "/home" , beforeEnter: requireAuth},
-  { path: "/Home", component: Home },
-  { path: "/editar/:id", component: Editar, beforeEnter: requireAuth },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  { path: "/", redirect: "/home" , beforeEnter: requireAuth, },
+  { path: "/Home", component: Home, name: "home", name: "home" },
+  { path: "/editar/:id", component: Editar, beforeEnter: requireAuth, name: "editar" },
+  { path: "/login", component: Login, name: "login" },
+  { path: "/register", component: Register,  name: "register"  },
 ];
 
 const router = createRouter({

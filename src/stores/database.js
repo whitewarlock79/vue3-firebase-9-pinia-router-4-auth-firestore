@@ -12,6 +12,7 @@ export const useDatabaseStore = defineStore("database", {
   state: () => ({
     documents: [], // Almacena los documentos obtenidos de Firestore
     loadingDoc: false, //
+    loading: false, // Indica si se está cargando información
   }),
   
   // Definimos las acciones que modificarán el estado
@@ -54,6 +55,7 @@ export const useDatabaseStore = defineStore("database", {
 
     },
     async addUrl(name) {
+      this.loading=true;
       try {
         const objetoDoc = {
           name: name,
@@ -68,6 +70,8 @@ export const useDatabaseStore = defineStore("database", {
         console.log("Document written w ith ID: ", docRef.id); 
       } catch (error) {
         console.error("Error adding document: ", error);
+      } finally {
+        this.loading=false;
       }
     },
 
@@ -97,6 +101,7 @@ async leerUrl(id){
 },
 
     async deleteUrl(id) {
+      this.loading=true;
       try {
         const docRef = doc(db, "urls", id);
         const docSpan = await getDoc(docRef);
@@ -115,9 +120,13 @@ async leerUrl(id){
       } catch (error) {
         console.error("Error deleting document: ", error);
       }
+      finally {
+        this.loading=false;
+      }
     },
 
 async updateUrl(id, url) {  
+  this.loading=true;
   try {
     const docRef = doc(db, "urls", id);
     const docSpan = await getDoc(docRef);
@@ -137,7 +146,6 @@ async updateUrl(id, url) {
     
     this.documents = this.documents.map((doc) =>
       doc.id === id? {...doc, name: url } : doc
-    router.push("/");
   );  
     
     } catch (error) {
@@ -145,6 +153,7 @@ async updateUrl(id, url) {
 
     } finally {
     this.loadingDoc=false;
+    this.loading=false;
       }
     },
 
